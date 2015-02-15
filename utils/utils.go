@@ -66,3 +66,15 @@ func RepeatingKeyXor(input []byte, key []byte) []byte {
 	}
 	return output
 }
+
+func PKCS7Padding(input []byte, length int) []byte {
+	inputLength := len(input)
+	paddingLength := (length - (inputLength % length)) % length
+	paddedLength := inputLength + paddingLength
+	padded := make([]byte, paddedLength)
+	copy(padded, input)
+	for i := 0; i < paddingLength; i++ {
+		padded[inputLength+i] = byte(paddingLength)
+	}
+	return padded
+}
