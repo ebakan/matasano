@@ -56,3 +56,13 @@ func BruteForceXor(input []byte) (byte, float64) {
 	SingleByteXor(input, bestCipher)
 	return bestCipher, bestScore
 }
+
+func RepeatingKeyXor(input []byte, key []byte) []byte {
+	length := len(input)
+	keyLength := len(key)
+	output := make([]byte, length)
+	for i := 0; i < length; i++ {
+		output[i] = input[i] ^ key[i%keyLength]
+	}
+	return output
+}
